@@ -16,11 +16,12 @@ void Hash_calculator::Start(const bool& key) {
   logging::add_console_log(
       std::clog, keywords::format = "[%Severity%] %TimeStamp%: %Message%");
 
-  logging::add_file_log(keywords::file_name = "sample_%N.log",
-                        keywords::rotation_size = Mb,
-                        keywords::time_based_rotation =
-                            sinks::file::rotation_at_time_point(0, 0, 0),
-                        keywords::format = "[%Severity%][%TimeStamp%]: %Message%");
+  logging::add_file_log(
+      keywords::file_name = "sample_%N.log",
+      keywords::rotation_size = Mb,
+      keywords::time_based_rotation =
+          sinks::file::rotation_at_time_point(0, 0, 0),
+      keywords::format = "[%Severity%][%TimeStamp%]: %Message%");
   for (unsigned int i = 0; i < Number_of_threads; ++i) {
     Threads.emplace_back(std::thread([&]() { Do_hashing(key); }));
   }
